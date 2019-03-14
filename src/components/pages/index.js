@@ -1,5 +1,1 @@
-import TodosPages from './Todos'
-
-export default {
-  TodosPages
-}
+export TodosNewPage from './TodosNewPage'

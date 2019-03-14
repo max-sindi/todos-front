@@ -1,3 +1,1 @@
-export default {
-  todos: 'todos',
-}
+export const todos = 'todos'
