@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import TodoForm from './TodoForm'
-import fields from './fields'
+import TodoForm from '../../Todos/TodoForm'
 
 class TodosPages extends Component {
   render() {
     return (
       <div>
-        <TodoForm fields={fields}/>
+        <TodoForm />
       </div>
     )
   }

@@ -4,7 +4,8 @@ import routingConfig from './config/routing'
 import pages from './components/pages'
 
 const todos = rootedPath(routingConfig.todos)
-const { TodosPage } = pages
+const { Todo_CreateNew_Page, Todo_Edit_Page } = pages.TodosPages
+// debugger
 
 class Routing extends Component {
   render() {
@@ -13,7 +14,8 @@ class Routing extends Component {
         <div>
           <NavLink to={todos}>To todos</NavLink>
           <Switch>
-            <Route path={todos} exact component={TodosPage} />
+            <Route path={`${todos}/new`} exact component={Todo_CreateNew_Page} />
+            <Route path={`${todos}/:id/edit`} exact component={Todo_Edit_Page} />
           </Switch>
         </div>
       </Router>

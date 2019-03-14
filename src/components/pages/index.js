@@ -1,5 +1,5 @@
-import TodosPage from './TodosPages'
+import TodosPages from './Todos'
 
 export default {
-  TodosPage
+  TodosPages
 }
