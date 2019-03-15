@@ -1,13 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { todos } from '../../config/routing'
+import { todos as todosPath} from 'config/routing'
+import { connect } from 'react-redux'
+import { FetchChecker, TodoItem } from 'components/partials'
+import { initTodosGetting } from 'store/todos/actions'
 
-const TodosAllPage = () => {
-  return (
-    <div>
-      <Link to={`/${todos}/new`}>Create new Todo -></Link>
-    </div>
-  )
+class TodosAllPage extends React.Component {
+
+  componentDidMount() {
+    this.props.initTodosGetting()
+  }
+
+  render() {
+    const { todos, isFetched } = this.props
+
+    return (
+      <div>
+        <Link to={`/${todosPath}/new`}>Create new Todo -></Link>
+        <div>
+          <FetchChecker isFetched={isFetched} data={todos} DataItemRender={TodoItem}/>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default TodosAllPage
+export default connect(
+  store => ({
+    todos: store.todos.gettedTodos,
+    isFetched: store.todos.isFetchedGet,
+  }),
+  { initTodosGetting }
+)(TodosAllPage)

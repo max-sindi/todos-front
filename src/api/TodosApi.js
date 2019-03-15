@@ -7,7 +7,11 @@ class TodosApi extends Api {
   }
 
   saveNewTodo(data) {
-    this.createRequest(this.apiUrl, 'post', data)
+    return this.sendRequest(this.apiUrl, 'post', data)
+  }
+
+  getTodos() {
+    return this.sendRequest(this.apiUrl, 'get')
   }
 }
 

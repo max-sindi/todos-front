@@ -1,8 +1,9 @@
 import axios from 'axios'
-const baseUrl = 'localhost:3000'
+// const baseUrl = process.env.API_DOMAIN
+const baseUrl = 'http://localhost:8080'
 
 class Api {
-  createRequest(url, method, params) {
+  sendRequest(url, method, params) {
     return axios[method](`${baseUrl}/${url}`, params)
   }
 }

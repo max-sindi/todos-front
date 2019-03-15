@@ -16,7 +16,7 @@ class TodosNewPage extends Component {
   }
 
   render() {
-    const { title, body} = this.props
+    const { title, body, clearTodoForm } = this.props
 
     return (
       <div>
@@ -26,6 +26,7 @@ class TodosNewPage extends Component {
             <input value={title.value} name="title" placeholder="Enter todo's title" onChange={this.handleInputChange}/>
             <input value={body.value} name="body" placeholder="Enter todo's body" onChange={this.handleInputChange}/>
             <button type="submit">Confirm</button>
+            <button type="button" onClick={clearTodoForm}>Clear</button>
           </form>
         </div>
       </div>
