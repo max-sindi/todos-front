@@ -15,7 +15,7 @@ const TodoItem = ({ deleteTodo, body, title, id, index }) => {
       <div>{title}</div>
       <div>{body}</div>
       <button onClick={callDeleteTodo}>Delete</button>
-      <Link to={`${todosPath}/${id}/edit`} />
+      <Link to={`${todosPath}/${id}/edit`}>Edit -></Link>
     </div>
   )
 }

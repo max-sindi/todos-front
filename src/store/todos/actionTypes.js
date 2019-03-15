@@ -3,3 +3,5 @@
   export const TODOS_CLEAR_FORM = 'TODOS_CLEAR_FORM'
   export const TODOS_GOT = 'TODOS_GOT'
   export const TODOS_DELETED_ONE = 'TODOS_DELETED_ONE'
+  export const TODOS_FETCH_SINGLE = 'TODOS_FETCH_SINGLE'
+  export const TODOS_SAVE_EDIT = 'TODOS_SAVE_EDIT'

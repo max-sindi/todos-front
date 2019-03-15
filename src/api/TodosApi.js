@@ -17,6 +17,10 @@ class TodosApi extends Api {
   deleteTodo(id) {
     return this.sendRequest(`${this.apiUrl}/${id}`, 'delete')
   }
+
+  getTodoSingle(id) {
+    return this.sendRequest(`${this.apiUrl}/${id}`, 'get')
+  }
 }
 
 export default TodosApi

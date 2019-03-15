@@ -9,10 +9,25 @@ import {
   TODOS_CLEAR_FORM,
   TODOS_GOT,
   TODOS_DELETED_ONE,
+  TODOS_FETCH_SINGLE,
 } from './actionTypes'
 
 const successCreateMessage = todoName => `Your todo ${todoName} was successfully created`
 const successDeleteMessage = todoName => `Todo ${todoName} was successfully deleted`
+const getDataFromResult = res => res.data
+
+export const fetchTodoSingle = id => dispatch =>
+  new TodosApi().getTodoSingle(id)
+    .then( res => dispatch(
+      createAction(TODOS_FETCH_SINGLE, { data: getDataFromResult(res) })
+    ))
+    .catch(defaultErrorCatcher)
+
+export const saveEditTodo = () => (dispatch, getState) =>{
+  // debugger
+  const { id } = getState().todos.fetchedSingleTodo
+  new TodosApi().saveEdit()
+}
 
 export const changeFormValue = ({ name, value }) => (
   createAction(TODOS_CHANGE_FORM_VALUE, { name, value })
@@ -34,7 +49,7 @@ export const saveCurrentTodo = () => {
 export const initTodosGetting = () => {
   return dispatch => {
     new TodosApi().getTodos()
-      .then(res => dispatch( createAction(TODOS_GOT, { data: res.data })))
+      .then(res => dispatch( createAction(TODOS_GOT, { data: getDataFromResult(res) })))
       .catch(defaultErrorCatcher)
   }
 }
