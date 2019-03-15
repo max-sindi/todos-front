@@ -82,6 +82,9 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  alias: {
+    '@': path.resolve(__dirname, 'src')
+  }
 };
 
 

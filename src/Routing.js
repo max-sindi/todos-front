@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom'
 import { todos } from './config/routing'
-import { TodosNewPage } from './components/pages/'
+import { TodosNewPage, TodosAllPage } from './components/pages'
 
 class Routing extends Component {
   render() {
@@ -10,7 +10,7 @@ class Routing extends Component {
         <>
           <NavLink to={`/${todos}`}>To todos</NavLink> <br/>
           <Switch>
-            <Route path={`/${todos}`} exact component={() => <span>All Todos. Coming soon</span>} />
+            <Route path={`/${todos}`} exact component={TodosAllPage} />
             <Route path={`/${todos}/new`} exact component={TodosNewPage} />
           </Switch>
         </>

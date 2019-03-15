@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-// import entities from './entities/reducer'
+import todos from './todos/todosReducer'
 
 const reducers = combineReducers({
-  // entities,
+  todos,
 })
 
 export default reducers
