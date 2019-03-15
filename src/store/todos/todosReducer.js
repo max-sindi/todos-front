@@ -1,4 +1,9 @@
-import { TODOS_CHANGE_FORM_VALUE, TODOS_CLEAR_FORM, TODOS_GOT } from './actionTypes'
+import {
+  TODOS_CHANGE_FORM_VALUE,
+  TODOS_CLEAR_FORM,
+  TODOS_GOT,
+  TODOS_DELETED_ONE,
+} from './actionTypes'
 
 const initialState = {
   form: {
@@ -39,6 +44,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         gettedTodos: payloads.data
+      }
+    }
+
+    case TODOS_DELETED_ONE: {
+      const newTodos = [].concat(state.gettedTodos)
+      newTodos.splice(payloads.index, 1)
+
+      return {
+        ...state,
+        gettedTodos: newTodos
       }
     }
 

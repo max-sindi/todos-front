@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { todos as todosPath} from 'config/routing'
 import { connect } from 'react-redux'
 import { FetchChecker, TodoItem } from 'components/partials'
-import { initTodosGetting } from 'store/todos/actions'
+import { initTodosGetting, deleteTodo } from 'store/todos/actions'
 
 class TodosAllPage extends React.Component {
 
@@ -30,5 +30,5 @@ export default connect(
     todos: store.todos.gettedTodos,
     isFetched: store.todos.isFetchedGet,
   }),
-  { initTodosGetting }
+  { initTodosGetting, deleteTodo }
 )(TodosAllPage)

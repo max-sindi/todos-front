@@ -1,7 +1,5 @@
-// export default {
   export const TODOS_CHANGE_FORM_VALUE = 'TODOS_CHANGE_FORM_VALUE'
-  // TODOS_SAVE_NEW: 'TODOS_SAVE_NEW',
   export const TODOS_REQUEST_RESULT = 'TODOS_REQUEST_RESULT'
   export const TODOS_CLEAR_FORM = 'TODOS_CLEAR_FORM'
   export const TODOS_GOT = 'TODOS_GOT'
-// }
+  export const TODOS_DELETED_ONE = 'TODOS_DELETED_ONE'

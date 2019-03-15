@@ -9,7 +9,11 @@ export const createNotification = (isTruly, message) => ({
   }
 })
 
-export const withDefaultMessage = err => ( createNotification(false, defaultFailureMessage(err) ) )
+export const withDefaultMessage = err => (
+  createNotification(false, defaultFailureMessage(err))
+)
+
+export const defaultErrorCatcher = err => withDefaultMessage(err)
 
 export default {
   createNotification,

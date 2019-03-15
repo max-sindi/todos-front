@@ -13,6 +13,10 @@ class TodosApi extends Api {
   getTodos() {
     return this.sendRequest(this.apiUrl, 'get')
   }
+
+  deleteTodo(id) {
+    return this.sendRequest(`${this.apiUrl}/${id}`, 'delete')
+  }
 }
 
 export default TodosApi

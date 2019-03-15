@@ -11,7 +11,9 @@ const FetchChecker = ({ isFetching, DataItemRender, data }) => {
   } else {
     return (
       <>
-        {data.map(item => <DataItemRender key={item.id} {...item} />)}
+        {data.map((item, index) =>
+          <DataItemRender key={item.id} {...item} index={index} />)
+        }
       </>
     )
   }
