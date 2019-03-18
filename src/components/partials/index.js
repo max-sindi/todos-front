@@ -1,4 +1,5 @@
 export FetchChecker from './FetchChecker'
-export TodoItem from './TodoItem'
 export Loader from './Loader'
-export TodoForm from './TodoForm'
+export TodoItem from './todos/TodoItem'
+export TodoForm from './todos/TodoForm'
+export Notifications from './notifications/Notifications'

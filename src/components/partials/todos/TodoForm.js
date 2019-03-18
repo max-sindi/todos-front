@@ -1,17 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changeFormValue } from 'store/todos/actions'
+import { changeFormValue, clearTodoForm, resetEditing } from 'store/todos/actions'
 
 const TodoForm = ({
   clearTodoForm,
   changeFormValue,
   handleSubmit,
+  resetEditing,
   isEditMode,
   form: {
     title,
     body,
   }
 }) => {
+  const firstInput = React.createRef()
   const handleInputChange = ({ target: { name, value } }) => changeFormValue({
     name, value
   })
@@ -19,11 +21,14 @@ const TodoForm = ({
   const callHandleSubmit = e => {
     e.preventDefault()
     handleSubmit()
+      // BUG: when form in CreateNewTodo, current === null
+      .then(res => firstInput.current && firstInput.current.focus())
   }
 
   return (
     <form onSubmit={callHandleSubmit}>
       <input
+        ref={firstInput}
         value={title.value}
         name="title"
         placeholder="Enter todo's title"
@@ -35,6 +40,11 @@ const TodoForm = ({
         onChange={handleInputChange}/>
       <button type="submit">Confirm</button>
       <button type="button" onClick={clearTodoForm}>Clear</button>
+      {
+        isEditMode && (
+          <button type="button" onClick={resetEditing}>Reset Editing</button>
+        )
+      }
     </form>
   )
 }
@@ -43,5 +53,5 @@ export default connect(
   store => ({
     form: store.todos.form
   }),
-  { changeFormValue }
+  { changeFormValue, clearTodoForm, resetEditing }
 )(TodoForm)

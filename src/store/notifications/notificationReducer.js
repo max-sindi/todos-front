@@ -1,7 +1,30 @@
-import { NOTIFICATIONS_NEW } from './actionTypes'
+import {
+  NOTIFICATIONS_NEW,
+  NOTIFICATIONS_DESTROY_ONE,
+} from './actionTypes'
+import uuid from 'uuid/v4'
 
 const initialState = {
-  notifications: [],
+  notificationLifeDuration: 50000,
+  /* each notification object example:
+    {
+      isTruly: Boolean,
+      message: String,
+      id: uuid String,
+    }
+  */
+  currentNotifications: [
+    {
+      isTruly: false,
+      message: "test dsadas",
+      id: 1,
+    },
+    {
+      isTruly: true,
+      message: "tesasdasda dsadas",
+      id: 2,
+    },
+  ],
 }
 
 export default (state = initialState, action) => {
@@ -11,10 +34,22 @@ export default (state = initialState, action) => {
     case NOTIFICATIONS_NEW: {
       return {
         ...state,
-        notifications: [
-          ...state.notifications,
-          payloads.notification
+        currentNotifications: [
+          ...state.currentNotifications,
+          {
+            ...payloads,
+            id: uuid()
+          }
         ]
+      }
+    }
+
+    case NOTIFICATIONS_DESTROY_ONE: {
+      const newNotifs = [].concat(state.currentNotifications)
+      newNotifs.splice(payloads.index, 1)
+      return {
+        ...state,
+        currentNotifications: newNotifs
       }
     }
 

@@ -21,6 +21,10 @@ class TodosApi extends Api {
   getTodoSingle(id) {
     return this.sendRequest(`${this.apiUrl}/${id}`, 'get')
   }
+
+  saveEdit(id, data) {
+    return this.sendRequest(`${this.apiUrl}/${id}`, 'put', data)
+  }
 }
 
 export default TodosApi

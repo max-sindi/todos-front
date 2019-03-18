@@ -10,42 +10,53 @@ import {
   TODOS_GOT,
   TODOS_DELETED_ONE,
   TODOS_FETCH_SINGLE,
+  TODOS_RESET_EDITING,
 } from './actionTypes'
 
 const successCreateMessage = todoName => `Your todo ${todoName} was successfully created`
-const successDeleteMessage = todoName => `Todo ${todoName} was successfully deleted`
+const successDeleteMessage = (todoName = '') => `Todo ${todoName} was successfully deleted`
+const successEditMessage = todoName => `Todo ${todoName} was successfully edited`
 const getDataFromResult = res => res.data
 
-export const fetchTodoSingle = id => dispatch =>
+// FETCHING SINNGLE
+export const fetchTodoSingle = id => dispatch => {
   new TodosApi().getTodoSingle(id)
     .then( res => dispatch(
       createAction(TODOS_FETCH_SINGLE, { data: getDataFromResult(res) })
     ))
     .catch(defaultErrorCatcher)
+}
+// SAVE EDITED
+export const saveEditTodo = () => (dispatch, getState) => {
+  const { todos } = getState()
+  const { id } = todos.fetchedSingleTodo
+  const dataToSend = getFormData(todos.form)
 
-export const saveEditTodo = () => (dispatch, getState) =>{
-  // debugger
-  const { id } = getState().todos.fetchedSingleTodo
-  new TodosApi().saveEdit()
+  return new TodosApi().saveEdit(id, dataToSend)
+    .then(res =>
+      createNotification(true, successEditMessage( todos.form.title.value ))
+    )
+    .catch(defaultErrorCatcher)
 }
 
+// CHANGE ANY FORM VALUE
 export const changeFormValue = ({ name, value }) => (
   createAction(TODOS_CHANGE_FORM_VALUE, { name, value })
 )
 
-export const saveCurrentTodo = () => {
-  return (dispatch, getState) => {
-    const todo = getFormData( getState().todos.form )
+// SAVE NEW
+export const saveNewTodo = () => (dispatch, getState) => {
+  const todo = getFormData( getState().todos.form )
 
-    new TodosApi().saveNewTodo(todo)
-      .then( res => {
-        dispatch( createNotification(true, successCreateMessage(res.title) ))
-        dispatch( clearTodoForm() )
-      })
-      .catch(defaultErrorCatcher)
-  }
+  return new TodosApi().saveNewTodo(todo)
+    .then( res => {
+      createNotification(true, successCreateMessage(todo.title))
+      dispatch( clearTodoForm() )
+    })
+    .catch(defaultErrorCatcher)
 }
 
+// GET MANY
 export const initTodosGetting = () => {
   return dispatch => {
     new TodosApi().getTodos()
@@ -54,21 +65,28 @@ export const initTodosGetting = () => {
   }
 }
 
-export const clearTodoForm = () => ( createAction(TODOS_CLEAR_FORM) )
+// CLEAR FORM
+export const clearTodoForm = () => createAction(TODOS_CLEAR_FORM)
+// RETURN EDITING FORM TO INITIAL STATE
+export const resetEditing = () => createAction(TODOS_RESET_EDITING)
 
-export const deleteTodo = (id, index) => dispatch => {
+// DELETE ONE
+export const deleteTodo = (id, index) => (dispatch, getState) => {
   new TodosApi().deleteTodo(id)
     .then(res => {
+      createNotification(true, successDeleteMessage())
       dispatch( createAction(TODOS_DELETED_ONE, { id, index } ))
-      dispatch( createNotification(true, successDeleteMessage(res.title)))
     })
     .catch(defaultErrorCatcher)
 }
 
 export default {
   changeFormValue,
-  saveCurrentTodo,
   clearTodoForm,
-  initTodosGetting,
   deleteTodo,
+  fetchTodoSingle,
+  initTodosGetting,
+  saveEditTodo,
+  saveNewTodo,
+  resetEditing,
 }

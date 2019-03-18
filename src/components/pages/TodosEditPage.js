@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchTodoSingle, saveEditTodo } from 'store/todos/actions'
+import { fetchTodoSingle, saveEditTodo, clearTodoForm } from 'store/todos/actions'
 import { TodoForm } from 'components/partials'
 
 class TodoEditPage extends React.Component {
 
   componentDidMount() {
+    this.props.clearTodoForm()
     this.props.fetchTodoSingle(this.props.match.params.id)
   }
 
@@ -14,7 +15,7 @@ class TodoEditPage extends React.Component {
       <div>
         <h2>Edit todo: </h2>
         <div className="todos-body">
-          <TodoForm handleSubmit={this.props.saveEditTodo} />
+          <TodoForm handleSubmit={this.props.saveEditTodo} isEditMode />
         </div>
       </div>
     )
@@ -22,5 +23,5 @@ class TodoEditPage extends React.Component {
 }
 
 export default connect(
-  null, { fetchTodoSingle, saveEditTodo }
+  null, { clearTodoForm, fetchTodoSingle, saveEditTodo }
 )(TodoEditPage)

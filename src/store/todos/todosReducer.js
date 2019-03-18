@@ -5,16 +5,16 @@ import {
   TODOS_GOT,
   TODOS_DELETED_ONE,
   TODOS_FETCH_SINGLE,
+  TODOS_RESET_EDITING,
 } from './actionTypes'
 
 const initialFormState = {
-  // form: {
-    title: {
-      value: '',
-    },
-    body: {
-      value: '',
-    },
+  title: {
+    value: '',
+  },
+  body: {
+    value: '',
+  },
 }
 
 const initialState = {
@@ -22,6 +22,12 @@ const initialState = {
   gettedTodos: null,
   isFetchedGet: false,
   fetchedSingleTodo: null,
+}
+
+const createFilledForm = data => {
+  const newForm = _.cloneDeep(initialFormState);
+  ['title', 'body'].forEach(key => newForm[key].value = data[key] || '')
+  return newForm
 }
 
 export default (state = initialState, action) => {
@@ -46,6 +52,10 @@ export default (state = initialState, action) => {
       return { ...state, form: _.cloneDeep(initialFormState) }
     }
 
+    case TODOS_RESET_EDITING: {
+      return { ...state, form: createFilledForm(state.fetchedSingleTodo)}
+    }
+
     case TODOS_GOT: {
       return {
         ...state,
@@ -64,16 +74,6 @@ export default (state = initialState, action) => {
     }
 
     case TODOS_FETCH_SINGLE: {
-
-      const createFilledForm = data => {
-        const newForm = _.cloneDeep(initialFormState)
-        // debugger
-        ['title', 'body'].forEach(key => newForm[key].value = data[key])
-        // _.forEach(data, (value, key) => newForm[key].value = value)
-        debugger
-        return newForm
-      }
-
       return {
         ...state,
         form: createFilledForm(payloads.data),

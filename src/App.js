@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux'
+import React, { Component } from 'react'
 import Routing from 'Routing'
-import store from './store/store'
+import { Notifications } from 'components/partials/'
 
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <>
         <Routing />
-      </Provider>
+        <Notifications />
+      </>
     );
   }
 }
