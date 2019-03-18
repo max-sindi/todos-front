@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { destroyNotification } from 'store/notifications/actions'
 import NotificationType from './NotificationTypes'
 import { DeleteButton, NotifWrapper } from './styled'
+import LifeDurationDisplay from './LifeDurationDisplay'
 
 class Notification extends Component {
   state = {
@@ -30,6 +31,8 @@ class Notification extends Component {
         <DeleteButton onClick={this.destroyThisNotification}>
           &#10005; {/* cross icon */}
         </DeleteButton>
+
+        <LifeDurationDisplay />
       </NotifWrapper>
     )
   }
