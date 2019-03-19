@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Routing from 'Routing'
+import Routing from './Routing'
 import { Notifications } from 'components/partials/'
 
 class App extends Component {

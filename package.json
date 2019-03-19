@@ -131,6 +131,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "babel-plugin-styled-components": "^1.10.0",
+    "react-test-renderer": "^16.8.4",
     "redux-logger": "^3.0.6"
   }
 }

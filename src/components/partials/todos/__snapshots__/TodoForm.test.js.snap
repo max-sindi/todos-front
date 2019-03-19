@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    name="title"
+    onChange={[Function]}
+    placeholder="Enter todo's title"
+    value=""
+  />
+  <input
+    name="body"
+    onChange={[Function]}
+    placeholder="Enter todo's body"
+    value=""
+  />
+  <button
+    type="submit"
+  >
+    Confirm
+  </button>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    Clear
+  </button>
+</form>
+`;
