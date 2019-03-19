@@ -1,25 +1,17 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import { connect } from 'react-redux'
+import { LifeDurationWrapper, LifeDurationInner } from './styled'
 
-const Wrapper = styled.div`
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
-`
-const indicatorIncreasing = keyframes`
-  from: radial-gradient(circle, red, yellow)
-`
-const Indicator = styled.div`
-  background: linear-gradient
-`
 
-const LifeDurationDisplay = () => {
+const LifeDurationDisplay = ({ lifeDuration }) => {
   return (
-    <Wrapper>
-
-    </Wrapper>
+    <LifeDurationWrapper duration={lifeDuration}>
+      <LifeDurationInner duration={lifeDuration}/>
+    </LifeDurationWrapper>
   )
 }
 
-export default LifeDurationDisplay
+export default connect(
+  store => ({
+    lifeDuration: store.notifications.notificationLifeDuration
+  }))(LifeDurationDisplay)

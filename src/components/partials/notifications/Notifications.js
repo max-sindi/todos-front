@@ -16,5 +16,5 @@ class Notifications extends Component {
 }
 
 export default connect(store => ({
-  notifs: store.notifications.currentNotifications
+  notifs: store.notifications.currentNotifications,
 }))(Notifications)

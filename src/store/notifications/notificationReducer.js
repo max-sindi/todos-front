@@ -5,7 +5,7 @@ import {
 import uuid from 'uuid/v4'
 
 const initialState = {
-  notificationLifeDuration: 50000,
+  notificationLifeDuration: 5000,
   /* each notification object example:
     {
       isTruly: Boolean,

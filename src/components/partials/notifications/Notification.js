@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { destroyNotification } from 'store/notifications/actions'
 import NotificationType from './NotificationTypes'
-import { DeleteButton, NotifWrapper } from './styled'
+import { DeleteButton, NotifWrapper, LifeDurationDisplayLayout } from './styled'
 import LifeDurationDisplay from './LifeDurationDisplay'
 
 class Notification extends Component {
@@ -22,17 +22,18 @@ class Notification extends Component {
   destroyThisNotification = () => this.props.destroyNotification(this.props.index)
 
   render() {
-    const { isTruly, message } = this.props
+    const { isTruly, message, notificationLifeDuration } = this.props
     return (
-      <NotifWrapper>
+      <NotifWrapper duration={notificationLifeDuration}>
         <NotificationType isTruly={isTruly}>
           <div>{message}</div>
         </NotificationType>
         <DeleteButton onClick={this.destroyThisNotification}>
           &#10005; {/* cross icon */}
         </DeleteButton>
-
-        <LifeDurationDisplay />
+        <LifeDurationDisplayLayout>
+          <LifeDurationDisplay />
+        </LifeDurationDisplayLayout>
       </NotifWrapper>
     )
   }
