@@ -2,14 +2,19 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 import { createLogger } from 'redux-logger'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './saga'
 
 const logger = createLogger({
   diff: true,
   collapsed: true,
 })
 
+const saga = createSagaMiddleware()
+
 const middlewares = [
   thunk,
+  saga,
   logger,
 ]
 
@@ -23,5 +28,7 @@ const store = createStore(
     reduxDevtools ? reduxDevtools() : f => f
   )
 )
+
+saga.run(rootSaga)
 
 export default store

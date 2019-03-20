@@ -27,4 +27,4 @@ class TodosApi extends Api {
   }
 }
 
-export default TodosApi
+export default new TodosApi()

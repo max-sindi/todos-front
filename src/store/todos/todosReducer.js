@@ -3,8 +3,8 @@ import {
   TODOS_CHANGE_FORM_VALUE,
   TODOS_CLEAR_FORM,
   TODOS_GOT,
+  TODOS_GOT_SINGLE,
   TODOS_DELETED_ONE,
-  TODOS_FETCH_SINGLE,
   TODOS_RESET_EDITING,
 } from './actionTypes'
 
@@ -73,13 +73,13 @@ export default (state = initialState, action) => {
       }
     }
 
-    case TODOS_FETCH_SINGLE: {
-      return {
-        ...state,
-        form: createFilledForm(payloads.data),
-        fetchedSingleTodo: payloads.data,
-      }
-    }
+    // case TODOS_FETCH_SINGLE: {
+    //   return {
+    //     ...state,
+    //     form: createFilledForm(payloads.data),
+    //     fetchedSingleTodo: payloads.data,
+    //   }
+    // }
 
     default: return state
   }
