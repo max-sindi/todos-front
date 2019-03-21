@@ -1,5 +1,7 @@
 export FetchChecker from './FetchChecker'
 export Loader from './Loader'
+export Filter from './Filter'
+export DeleteButton from './DeleteButton'
 export TodoItem from './todos/TodoItem'
 export TodoForm from './todos/TodoForm'
 export Notifications from './notifications/Notifications'

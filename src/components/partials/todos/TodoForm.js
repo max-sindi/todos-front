@@ -6,11 +6,12 @@ const TodoForm = ({
   clearTodoForm,
   changeFormValue,
   handleSubmit,
-  resetEditing,
   isEditMode,
+  resetEditing,
   form: {
-    title,
     body,
+    isDone,
+    title,
   }
 }) => {
   const firstInput = React.createRef()
@@ -18,10 +19,14 @@ const TodoForm = ({
     name, value
   })
 
+  const handleCheckboxChange = ({ target: { name, checked }}) => changeFormValue({
+    name, value: checked
+  })
+
   const callHandleSubmit = e => {
     e.preventDefault()
     handleSubmit()
-      // BUG: when form in CreateNewTodo, current === null
+      // BUG: when form called in TodoNewPage, current === null
       .then(res => firstInput.current && firstInput.current.focus())
   }
 
@@ -32,12 +37,18 @@ const TodoForm = ({
         value={title.value}
         name="title"
         placeholder="Enter todo's title"
-        onChange={handleInputChange}/>
+        onChange={handleInputChange} />
       <input
         value={body.value}
         name="body"
         placeholder="Enter todo's body"
-        onChange={handleInputChange}/>
+        onChange={handleInputChange} />
+      <input
+        name="isDone"
+        type="checkbox"
+        checked={isDone.value}
+        onChange={handleCheckboxChange} />
+
       <button type="submit">Confirm</button>
       <button type="button" onClick={clearTodoForm}>Clear</button>
       {
