@@ -15,6 +15,9 @@ const initialFormState = {
   body: {
     value: '',
   },
+  isDone: {
+    value: false
+  }
 }
 
 const initialState = {
@@ -26,7 +29,7 @@ const initialState = {
 
 const createFilledForm = data => {
   const newForm = _.cloneDeep(initialFormState);
-  ['title', 'body'].forEach(key => newForm[key].value = data[key] || '')
+  ['title', 'body', 'isDone'].forEach(key => newForm[key].value = data[key])
   return newForm
 }
 
