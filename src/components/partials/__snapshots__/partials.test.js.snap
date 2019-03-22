@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search renders correctly 1`] = `
+<div
+  className="styled__Relative-sc-186tyjq-2 gRGrvy"
+>
+  <input
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    value=""
+  />
+  <button
+    className="styled__Button-sc-186tyjq-0 styled__DeleteButtonStyled-sc-186tyjq-1 liuCwo"
+    onClick={[Function]}
+  >
+    <span>
+      ✕
+    </span>
+     
+  </button>
+</div>
+`;
