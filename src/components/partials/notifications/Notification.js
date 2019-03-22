@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { destroyNotification } from 'store/notifications/actions'
 import NotificationType from './NotificationTypes'
-import { DeleteButton, NotifWrapper, LifeDurationDisplayLayout } from './styled'
+import { NotifWrapper, LifeDurationDisplayLayout } from './styled'
+import { DeleteButton } from 'components/partials/'
 import LifeDurationDisplay from './LifeDurationDisplay'
 
 class Notification extends Component {

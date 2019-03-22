@@ -53,23 +53,6 @@ export const NotifWrapper = styled.div`
   animation-fill-mode: forwards;
 `;
 
-const Button = styled.button`
-  cursor: pointer;
-`;
-
-export const DeleteButton = styled(Button)`
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  line-height: 0.9;
-`;
-
 export const NotifSuccess = styled(NotifWrapper)`
   color: green;
   background-color: rgba(200, 247, 197, 0.1);
