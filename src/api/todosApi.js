@@ -10,8 +10,13 @@ class TodosApi extends Api {
     return this.sendRequest(this.apiUrl, 'post', data)
   }
 
-  getTodos() {
-    return this.sendRequest(this.apiUrl, 'get')
+  getTodos(params) {
+    let paramsToSend = null
+
+    if(params) {
+      paramsToSend = { params }
+    }
+    return this.sendRequest(this.apiUrl, 'get', paramsToSend)
   }
 
   deleteTodo(id) {
@@ -27,4 +32,4 @@ class TodosApi extends Api {
   }
 }
 
-export default TodosApi
+export default new TodosApi()

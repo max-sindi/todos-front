@@ -13,18 +13,7 @@ const initialState = {
       id: uuid String,
     }
   */
-  currentNotifications: [
-    {
-      isTruly: false,
-      message: "test dsadas",
-      id: 1,
-    },
-    {
-      isTruly: true,
-      message: "tesasdasda dsadas",
-      id: 2,
-    },
-  ],
+  currentNotifications: [],
 }
 
 export default (state = initialState, action) => {
