@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { changeFormValue, clearTodoForm, resetEditing } from 'store/todos/actions'
+import { createNotification } from 'store/notifications/actions'
+import { getFormData } from 'store/_utils'
+import joi from 'joi'
 
 const TodoForm = ({
   clearTodoForm,
@@ -8,12 +11,10 @@ const TodoForm = ({
   handleSubmit,
   isEditMode,
   resetEditing,
-  form: {
-    body,
-    isDone,
-    title,
-  }
+  form,
 }) => {
+  const formData = getFormData(form)
+  const { body, title, isDone } = formData
   const firstInput = React.createRef()
   const handleInputChange = ({ target: { name, value } }) => changeFormValue({
     name, value
@@ -23,30 +24,53 @@ const TodoForm = ({
     name, value: checked
   })
 
+  // has side effect - pushes notification if not valid (with validation error message)
+  const isFormValid = () => {
+    let isValid
+    const schema = joi.object().keys({
+      body: joi.string().required(),
+      title: joi.string().required(),
+      isDone: joi.boolean(),
+    })
+
+    joi.validate(formData, schema, (err) => {
+      if(err) {
+        isValid = false
+        createNotification(false, err.details[0].message)
+      } else {
+        isValid = true
+      }
+    })
+
+    return isValid
+  }
+
   const callHandleSubmit = e => {
     e.preventDefault()
-    handleSubmit()
-      // BUG: when form called in TodoNewPage, current === null
-      .then(res => firstInput.current && firstInput.current.focus())
+    if ( isFormValid() ) {
+      handleSubmit()
+        // BUG: when form called in TodoNewPage, current === null
+        .then(res => firstInput.current && firstInput.current.focus())
+    }
   }
 
   return (
     <form onSubmit={callHandleSubmit}>
       <input
         ref={firstInput}
-        value={title.value}
+        value={title}
         name="title"
         placeholder="Enter todo's title"
         onChange={handleInputChange} />
       <input
-        value={body.value}
+        value={body}
         name="body"
         placeholder="Enter todo's body"
         onChange={handleInputChange} />
       <input
         name="isDone"
         type="checkbox"
-        checked={isDone.value}
+        checked={isDone}
         onChange={handleCheckboxChange} />
 
       <button type="submit">Confirm</button>
