@@ -5,7 +5,7 @@ import { DeleteButton } from './'
 import { Relative } from 'components/partials/styled'
 import PropTypes from 'prop-types';
 
-class Filter extends Component {
+class Search extends Component {
   componentWillUnmount() {
     this.props.clearFilter()
   }
@@ -35,12 +35,12 @@ class Filter extends Component {
   }
 }
 
-Filter.propTypes = {
+Search.propTypes = {
   onChangeTrigger: PropTypes.func,
   shouldClearTriggerChange: PropTypes.bool,
 }
 
-Filter.defaultProps = {
+Search.defaultProps = {
   shouldTriggerOnClear: true
 }
 
@@ -52,4 +52,4 @@ export default connect(
     changeFilterValue,
     clearFilter
   }
-)(Filter)
+)(Search)
