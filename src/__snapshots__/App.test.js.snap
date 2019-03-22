@@ -12,64 +12,7 @@ Array [
   " ",
   <br />,
   <div
-    className="styled__StyledNotifsWrapper-z3lj6c-7 epTpEC"
-  >
-    <div
-      className="styled__NotifWrapper-z3lj6c-2 cOqxjH"
-    >
-      <div
-        className="styled__NotifWrapper-z3lj6c-2 styled__NotifFaulire-z3lj6c-6 muzhc"
-      >
-        <div>
-          test dsadas
-        </div>
-      </div>
-      <button
-        className="styled__Button-z3lj6c-3 styled__DeleteButton-z3lj6c-4 bxfWlV"
-        onClick={[Function]}
-      >
-        ✕ 
-      </button>
-      <div
-        className="styled__LifeDurationDisplayLayout-z3lj6c-8 iHWHdI"
-      >
-        <div
-          className="styled__LifeDurationWrapper-z3lj6c-0 kNgUFy"
-        >
-          <div
-            className="styled__LifeDurationInner-z3lj6c-1 gItmoT"
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="styled__NotifWrapper-z3lj6c-2 cOqxjH"
-    >
-      <div
-        className="styled__NotifWrapper-z3lj6c-2 styled__NotifSuccess-z3lj6c-5 bYupjT"
-      >
-        <div>
-          tesasdasda dsadas
-        </div>
-      </div>
-      <button
-        className="styled__Button-z3lj6c-3 styled__DeleteButton-z3lj6c-4 bxfWlV"
-        onClick={[Function]}
-      >
-        ✕ 
-      </button>
-      <div
-        className="styled__LifeDurationDisplayLayout-z3lj6c-8 iHWHdI"
-      >
-        <div
-          className="styled__LifeDurationWrapper-z3lj6c-0 kNgUFy"
-        >
-          <div
-            className="styled__LifeDurationInner-z3lj6c-1 gItmoT"
-          />
-        </div>
-      </div>
-    </div>
-  </div>,
+    className="styled__StyledNotifsWrapper-z3lj6c-5 iSJhIs"
+  />,
 ]
 `;
