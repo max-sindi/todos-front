@@ -4,6 +4,7 @@ import {createLogger} from "redux-logger"
 import createSaga from 'redux-saga'
 import rootSaga from './saga'
 import combinedReducers from "./reducers"
+import { requestsPromiseMiddleware } from 'redux-saga-requests'
 
 const logger = createLogger({diff: true, collapsed: true})
 const saga = createSaga()
@@ -13,7 +14,7 @@ const store = createStore(
   combinedReducers,
   undefined,
   compose(
-    applyMiddleware( thunk, saga, logger),
+    applyMiddleware( thunk, requestsPromiseMiddleware(), saga, logger),
     reduxDevtools ? reduxDevtools() : f => f
   )
 )

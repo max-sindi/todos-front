@@ -11,7 +11,8 @@ class TodoEdit extends Component {
 
   submitAction = (data) => {
     this.props.updateTodoById(this.props.match.params.id, data)
-      .then(res => {debugger})
+      .then(res => this.props.history.push('/todos'))
+      .catch(err => console.error(err))
   }
 
   render() {

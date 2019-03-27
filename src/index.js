@@ -5,14 +5,17 @@ import * as serviceWorker from './serviceWorker'
 import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
 import store from "store";
 import * as Pages from 'components/pages'
+import Notifications from "components/notifications/Notifications"
 
 
 ReactDOM.render(
   <Provider store={store}>
+    <Notifications/>
     <Router>
       <Switch>
         <Route exact={true} path={'/'} component={() => <Redirect to={'/todos'}/>} />
         <Route exact={true} path={'/todos'} component={Pages.TodosAll}/>
+        <Route exact={true} path={'/todos/new'} component={Pages.TodosNew}/>
         <Route exact={true} path={'/todos/:id/edit'} component={Pages.TodoEdit} />
       </Switch>
     </Router>

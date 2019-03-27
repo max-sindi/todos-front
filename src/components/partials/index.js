@@ -3,3 +3,4 @@ export * as form from './form/'
 export Loader from './Loader'
 export TodoItem from './todo/TodoItem'
 export TodoForm from "./todo/TodoForm"
+export DeleteButton from './DeleteButton'
