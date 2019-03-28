@@ -4,6 +4,7 @@ import {form} from "components/partials"
 import PropTypes from 'prop-types'
 import {FieldTitle} from "./TodoItem"
 import {Card, Button} from "antd"
+import joi from 'joi'
 
 const {Input, Checkbox, TextArea} = form
 
@@ -51,6 +52,26 @@ class TodoForm extends Component {
 
   updateForm = changes => {
     this.setState(state => ({...state, form: {...state.form, ...changes}}))
+  }
+
+  isFormValid = () => {
+    let isValid
+    const schema = joi.object().keys({
+      body: joi.string().required(),
+      title: joi.string().required(),
+      isDone: joi.boolean(),
+    })
+
+    joi.validate(formData, schema, (err) => {
+      if(err) {
+        isValid = false
+        createNotification(false, err.details[0].message)
+      } else {
+        isValid = true
+      }
+    })
+
+    return isValid
   }
 
   render() {

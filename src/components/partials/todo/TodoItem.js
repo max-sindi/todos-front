@@ -7,7 +7,6 @@ import {withRouter} from "react-router-dom"
 import {Button, Card, Icon} from "antd"
 import styled from "styled-components"
 
-
 const LinkToEdit = links.EditTodoById
 
 export const FieldTitle = styled.label`
