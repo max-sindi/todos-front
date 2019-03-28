@@ -32,14 +32,15 @@ export const updateTodoById = (id, data) => ({
   }
 })
 
-export const deleteTodoById = id => ({
+export const deleteTodoById = (id, index) => ({
   type: types.DELETE_TODO_SIGNLE,
   request: {
     url: `/todos/${id}`,
     method: 'delete'
   },
   meta: {
-    asPromise: true
+    asPromise: true,
+    index,
   }
 })
 
@@ -48,7 +49,7 @@ export const createNewTodo = todoData => ({
   request: {
     url: '/todos',
     method: 'post',
-    data: { ...todoData }
+    data: todoData
   },
   meta: {
     asPromise: true,

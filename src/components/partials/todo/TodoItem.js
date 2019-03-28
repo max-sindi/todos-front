@@ -4,29 +4,65 @@ import {links} from 'components/partials/index'
 import {deleteTodoById} from "store/todos/todosActions"
 import {connect} from "react-redux"
 import {withRouter} from "react-router-dom"
+import {Button, Card, Icon} from "antd"
+import styled from "styled-components"
 
 
 const LinkToEdit = links.EditTodoById
 
+export const FieldTitle = styled.div`
+  font-size: 18px;
+`
+
 TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired
+  todo: PropTypes.object.isRequired,
+  indexInArray: PropTypes.number.isRequired,
 };
 
 function TodoItem({
   todo: {
     title,
     body,
+    isDone,
     id
   },
   deleteTodoById,
+  indexInArray,
 }) {
+
+  function deleteHandler() {
+    deleteTodoById(id, indexInArray)
+  }
+
   return (
-    <div>
-      <div>{title}</div>
-      <div>{body}</div>
-      <LinkToEdit id={id}>Edit</LinkToEdit>
-      <button onClick={() => deleteTodoById(id)}>Delete</button>
-    </div>
+    <Card style={{marginBottom: 20}}>
+      <FieldTitle>
+        Todo Title:
+      </FieldTitle>
+      <div>
+        {title}
+      </div>
+      <FieldTitle>
+        Todo content:
+      </FieldTitle>
+      <div>
+        {body}
+      </div>
+      <FieldTitle>
+        Done:
+      </FieldTitle>
+      <div style={{marginBottom: 20}}>
+        <Icon type={isDone ? 'check' : 'close'}/>
+      </div>
+      <LinkToEdit id={id}>
+        <Button icon={"edit"} style={{marginRight: 20}}>
+          Edit
+        </Button>
+      </LinkToEdit>
+      <Button type={"danger"} onClick={deleteHandler} icon={"delete"}>
+        Delete
+      </Button>
+    </Card>
   );
 }
 

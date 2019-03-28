@@ -7,6 +7,7 @@ function TodosNew(props) {
   function createNewTodo(params) {
     props.createNewTodo(params)
       .then(() => props.history.push('/todos'))
+      .catch(err => console.error(err))
   }
   return (
     <div>

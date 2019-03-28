@@ -9,10 +9,16 @@ const initialState = {
 
 
 export const todos = (state = initialState, action) => {
-  const {type, payload, data, meta} = action
+  const {type, data, meta} = action
 
   const availableMutations = {
     [success(types.FETCH_TODOS)]: () => ({...state, data}),
+    [success(types.DELETE_TODO_SIGNLE)]: () => ({
+      ...state, data: [
+        ...state.data.slice(0, meta.index),
+        ...state.data.slice(meta.index + 1)
+      ]
+    })
   }
 
   const matchedAction = availableMutations[type]
