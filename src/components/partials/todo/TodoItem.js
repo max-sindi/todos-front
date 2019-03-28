@@ -10,7 +10,7 @@ import styled from "styled-components"
 
 const LinkToEdit = links.EditTodoById
 
-export const FieldTitle = styled.div`
+export const FieldTitle = styled.label`
   font-size: 18px;
 `
 
@@ -50,10 +50,8 @@ function TodoItem({
       </div>
       <FieldTitle>
         Done:
-      </FieldTitle>
-      <div style={{marginBottom: 20}}>
         <Icon type={isDone ? 'check' : 'close'}/>
-      </div>
+      </FieldTitle>
       <LinkToEdit id={id}>
         <Button icon={"edit"} style={{marginRight: 20}}>
           Edit

@@ -1,6 +1,6 @@
 import {types} from "./todosActions"
 import {requestsReducer} from "redux-saga-requests"
-import {success} from "redux-saga-requests"
+import {success, error} from "redux-saga-requests"
 
 const initialState = {
   data: [],
@@ -12,7 +12,9 @@ export const todos = (state = initialState, action) => {
   const {type, data, meta} = action
 
   const availableMutations = {
-    [success(types.FETCH_TODOS)]: () => ({...state, data}),
+    [types.FETCH_TODOS]: () => ({...state, isFetching: true}),
+    [success(types.FETCH_TODOS)]: () => ({...state, isFetching: false, data}),
+    [error(types.FETCH_TODOS)]: () => ({...state, isFetching: false}),
     [success(types.DELETE_TODO_SIGNLE)]: () => ({
       ...state, data: [
         ...state.data.slice(0, meta.index),

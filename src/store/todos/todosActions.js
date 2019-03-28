@@ -9,7 +9,8 @@ export const types = {
 export const fetchTodos = (params = {}) => ({
   type: types.FETCH_TODOS,
   request: {
-    url: '/todos'
+    url: '/todos',
+    params,
   }
 })
 
@@ -55,3 +56,9 @@ export const createNewTodo = todoData => ({
     asPromise: true,
   }
 })
+
+export const fetchTodosBySearchString = () => (dispatch, getState) => {
+  const {searchString} = getState().search
+  const params = searchString ? {body: searchString} : null
+  dispatch(fetchTodos(params))
+}

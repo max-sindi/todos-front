@@ -4,3 +4,4 @@ export Loader from './Loader'
 export TodoItem from './todo/TodoItem'
 export TodoForm from "./todo/TodoForm"
 export DeleteButton from './DeleteButton'
+export Search from './Search'

@@ -1,15 +1,15 @@
-import {success} from "redux-saga-requests";
-import {types} from "../todos/todosActions";
+import {types} from './searchActions'
 
 const initialState = {
   searchString: '',
 }
 
 export default (state = initialState, action) => {
-  const {type} = action
+  const {type, payload} = action
 
   const availableMutations = {
-    [SEARCH_CHANGE_VALUE
+    [types.SEARCH_CHANGE_STRING]: () => ({...state, searchString: payload}),
+    [types.SEARCH_CLEAR_STRING]: () => ({...state, searchString: ''}),
   }
 
   const matchedAction = availableMutations[type]

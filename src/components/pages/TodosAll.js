@@ -1,15 +1,24 @@
 import React, {Component} from 'react'
 import {fetchTodos} from "store/todos/todosActions"
 import {connect} from "react-redux"
-import {Loader, TodoItem, links} from "components/partials"
+import {Loader, TodoItem, links, Search} from "components/partials"
 import {Button, Card} from "antd"
+import styled from 'styled-components'
+import {fetchTodosBySearchString} from "store/todos/todosActions"
 
 
 const CreateNewTodoLink = links.CreateNewTodo
+const SearchContainer = styled.div`
+  margin-bottom: 20px;
+`
 
 class TodosAll extends Component {
   componentDidMount() {
     this.props.fetchTodos()
+  }
+
+  searchChangeCb = () => {
+    this.props.fetchTodosBySearchString()
   }
 
   render() {
@@ -22,6 +31,9 @@ class TodosAll extends Component {
             Create another one
           </Button>
         </CreateNewTodoLink>
+        <SearchContainer>
+          <Search onChangeCb={this.searchChangeCb}/>
+        </SearchContainer>
         <Card>
           {/*mapping items*/}
           {isFetching ? <Loader /> : todos.map(
@@ -36,7 +48,7 @@ class TodosAll extends Component {
 export default connect(
   store => ({
     todos: store.todos.data,
-    isFetching: store.todos.pending > 0
+    isFetching: store.todos.isFetching
   }),
-  {fetchTodos}
+  {fetchTodos, fetchTodosBySearchString}
 )(TodosAll)
