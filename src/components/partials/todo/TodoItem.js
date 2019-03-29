@@ -28,7 +28,6 @@ function TodoItem({
   deleteTodoById,
   indexInArray,
 }) {
-
   function deleteHandler() {
     deleteTodoById(id, indexInArray)
   }
@@ -51,14 +50,16 @@ function TodoItem({
         Done:
         <Icon type={isDone ? 'check' : 'close'}/>
       </FieldTitle>
-      <LinkToEdit id={id}>
-        <Button icon={"edit"} style={{marginRight: 20}}>
-          Edit
+      <div>
+        <LinkToEdit id={id}>
+          <Button icon={"edit"} style={{marginRight: 20}}>
+            Edit
+          </Button>
+        </LinkToEdit>
+        <Button type={"danger"} onClick={deleteHandler} icon={"delete"}>
+          Delete
         </Button>
-      </LinkToEdit>
-      <Button type={"danger"} onClick={deleteHandler} icon={"delete"}>
-        Delete
-      </Button>
+      </div>
     </Card>
   );
 }

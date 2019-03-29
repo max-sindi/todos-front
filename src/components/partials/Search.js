@@ -5,36 +5,43 @@ import {connect} from "react-redux"
 import {changeSearchString, clearSearchString} from "store/search/searchActions"
 import {Icon} from "antd"
 
-
-Search.propTypes = {
-  onChangeCb: PropTypes.func
-};
-
-function Search({ searchString, changeSearchString, onChangeCb, clearSearchString }) {
-  function onChangeHandler(e) {
-    changeSearchString(e.target.value)
-    callChangeCb()
+class Search extends React.Component {
+  static propTypes = {
+    onChangeCb: PropTypes.func
   }
 
-  function clearSearch() {
-    clearSearchString()
-    callChangeCb()
+  componentWillUnmount() {
+    this.props.clearSearchString()
   }
 
-  function callChangeCb() {
+  onChangeHandler = (e) => {
+    this.props.changeSearchString(e.target.value)
+    this.callChangeCb()
+  }
+
+  clearSearch = () => {
+    this.props.clearSearchString()
+    this.callChangeCb()
+  }
+
+  callChangeCb = () => {
+    const {onChangeCb} = this.props
     onChangeCb ? onChangeCb() : console.warn('onChangeCb not passed')
   }
 
-  return (
-    <div>
-      <Input
-        value={searchString}
-        onChange={onChangeHandler}
-        prefix={<Icon type={"search"} />}
-        suffix={<Icon type={"close"} onClick={clearSearch}/>}
-      />
-    </div>
-  );
+  render() {
+    const {searchString} = this.props
+    return (
+      <div>
+        <Input
+          value={searchString}
+          onChange={this.onChangeHandler}
+          prefix={<Icon type={"search"} />}
+          suffix={<Icon type={"close"} onClick={this.clearSearch}/>}
+        />
+      </div>
+    )
+  }
 }
 
 export default connect(

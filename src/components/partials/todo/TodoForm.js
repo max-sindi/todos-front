@@ -20,18 +20,26 @@ class TodoForm extends Component {
     // todo: PropTypes.oneOf([null, PropTypes.object]).isRequired,
   }
 
+  // maybe this should be defined in constructor?
+  static formSchema = joi.object().keys({
+    body: joi.string().required(),
+    title: joi.string().required(),
+    isDone: joi.boolean(),
+    id: joi.any()
+  })
+
   state = {
     form: {
       title: '',
       body: '',
       isDone: false,
-    }
+    },
   }
 
   componentDidUpdate = (prevProps) => {
     // push todo-data to state
     if(this.props.todo !== prevProps.todo) {
-      this.setState(state => ({...state, form: {...state.form, ...this.props.todo}}))
+      this.setState(state => ({...state, form: {...state.form, ...this.props.todo, id: undefined}}))
     }
   }
 
@@ -56,16 +64,10 @@ class TodoForm extends Component {
 
   isFormValid = () => {
     let isValid
-    const schema = joi.object().keys({
-      body: joi.string().required(),
-      title: joi.string().required(),
-      isDone: joi.boolean(),
-    })
 
-    joi.validate(formData, schema, (err) => {
+    joi.validate(this.state.form, TodoForm.formSchema, (err) => {
       if(err) {
         isValid = false
-        createNotification(false, err.details[0].message)
       } else {
         isValid = true
       }
@@ -92,7 +94,14 @@ class TodoForm extends Component {
               <FieldTitle>Done:</FieldTitle>
               <Checkbox name={"isDone"} checked={isDone} onChange={this.onCheckboxChange}/>
             </Card>
-            <Button htmlType={"submit"} icon={"check"} style={{marginTop: 20}}>Update</Button>
+            <Button
+              disabled={!this.isFormValid()}
+              htmlType={"submit"}
+              icon={"check"}
+              style={{marginTop: 20}}
+            >
+                Update
+            </Button>
           </form>
         )}
       </div>

@@ -5,3 +5,4 @@ export TodoItem from './todo/TodoItem'
 export TodoForm from "./todo/TodoForm"
 export DeleteButton from './DeleteButton'
 export Search from './Search'
+export TodosFilters from './todo/TodosFilters'
