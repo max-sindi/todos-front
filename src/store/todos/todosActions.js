@@ -57,10 +57,13 @@ export const createNewTodo = todoData => ({
   }
 })
 
-export const fetchTodosBySearchString = (params = {}) => (dispatch, getState) => {
-  const {searchString} = getState().search
-  // 'q' means full-text search
-  // https://github.com/typicode/json-server#full-text-search
+export const fetchTodosWithFiltersAndSearch = () => (dispatch, getState) => {
+  const state = getState()
+  const {searchString} = state.search
+  const {filterByDone} = state.todosFilters
+  // 'q' means full-text search, https://github.com/typicode/json-server#full-text-search
   const searchParams = searchString ? {q: searchString} : null
-  dispatch(fetchTodos({...params, ...searchParams}))
+  const filterByDoneParams = filterByDone ? {isDone: filterByDone} : null
+
+  dispatch(fetchTodos({...searchParams, ...filterByDoneParams}))
 }

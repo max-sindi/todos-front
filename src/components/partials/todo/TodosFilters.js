@@ -2,11 +2,20 @@ import React from 'react';
 import {RadioGroup} from "components/partials/form/"
 import {changeFilterByDone} from "store/todosFilters/todosFiltersActions"
 import {connect} from "react-redux"
+import Proptypes from "prop-types"
 
 
-function TodosFilters({value, changeFilterByDone}) {
+
+TodosFilters.propTypes = {
+  // action which will be called after every filter change
+  fetchAction: Proptypes.func,
+  changeFilterByDone: Proptypes.func.isRequired,
+}
+
+function TodosFilters({value, changeFilterByDone, fetchAction}) {
   function changeHandler(e) {
     changeFilterByDone(e.target.value)
+    fetchAction()
   }
 
   return (
@@ -15,18 +24,18 @@ function TodosFilters({value, changeFilterByDone}) {
         options={[
           {
             label: 'All',
-            value: 'all',
+            value: '',
           },
           {
             label: 'Done',
-            value: 'done',
+            value: 'true',
           },
           {
             label: 'In Progress',
-            value: 'notDone',
+            value: 'false',
           },
         ]}
-        defaultValue={'all'}
+        defaultValue={''}
         onChange={changeHandler}
         value={value}
       />
