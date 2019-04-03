@@ -9,7 +9,7 @@ export const types = {
 export const fetchTodos = (params = {}) => ({
   type: types.FETCH_TODOS,
   request: {
-    url: '/todos',
+    url: '/todos/',
     params,
   }
 })
@@ -17,14 +17,14 @@ export const fetchTodos = (params = {}) => ({
 export const fetchTodoById = id => ({
   type: types.FETCH_TODO_SINGLE,
   request: {
-    url: `/todos/${id}`
+    url: `/todos/${id}/`
   }
 })
 
 export const updateTodoById = (id, data) => ({
   type: types.UPDATE_TODO_SINGLE,
   request: {
-    url: `/todos/${id}`,
+    url: `/todos/${id}/`,
     method: 'put',
     data,
   },
@@ -36,7 +36,7 @@ export const updateTodoById = (id, data) => ({
 export const deleteTodoById = (id, index) => ({
   type: types.DELETE_TODO_SIGNLE,
   request: {
-    url: `/todos/${id}`,
+    url: `/todos/${id}/`,
     method: 'delete'
   },
   meta: {
@@ -48,7 +48,7 @@ export const deleteTodoById = (id, index) => ({
 export const createNewTodo = todoData => ({
   type: types.CREATE_NEW_TODO,
   request: {
-    url: '/todos',
+    url: '/todos/',
     method: 'post',
     data: todoData
   },
