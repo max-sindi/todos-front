@@ -1,17 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux'
-import store from './store/store'
-import * as serviceWorker from './serviceWorker';
+import React from "react"
+import ReactDOM from 'react-dom'
+import {Provider} from "react-redux"
+import * as serviceWorker from './serviceWorker'
+import {Route, BrowserRouter as Router, Switch, Redirect, Link} from "react-router-dom"
+import store from "store"
+import * as Pages from 'components/pages'
+import Notifications from "components/notifications/Notifications"
+import {Card} from "antd"
+import 'antd/dist/antd.css'
+
+
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Card>
+      <Notifications/>
+      <Router>
+        <>
+          <Link to={"/"}>Home -></Link>
+          <Switch>
+            <Route exact={true} path={'/'} component={() => <Redirect to={'/todos'}/>} />
+            <Route exact={true} path={'/todos'} component={Pages.TodosAll}/>
+            <Route exact={true} path={'/todos/new'} component={Pages.TodosNew}/>
+            <Route exact={true} path={'/todos/:id/edit'} component={Pages.TodoEdit} />
+          </Switch>
+        </>
+      </Router>
+    </Card>
   </Provider>,
-  document.getElementById('root'));
+  document.getElementById('root')
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()

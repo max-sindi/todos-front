@@ -1,4 +1,0 @@
-// export default {
-export const NOTIFICATIONS_NEW = 'NOTIFICATIONS_NEW'
-export const NOTIFICATIONS_DESTROY_ONE = 'NOTIFICATIONS_DESTROY_ONE'
-// }
