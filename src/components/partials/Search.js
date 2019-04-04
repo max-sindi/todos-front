@@ -1,55 +1,42 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { changeFilterValue, clearFilter } from 'store/general/generalActions'
-import { DeleteButton } from './'
-import { Relative } from 'components/partials/styled'
+import React from 'react';
 import PropTypes from 'prop-types';
-
-class Search extends Component {
-  componentWillUnmount() {
-    this.props.clearFilter()
-  }
-
-  handleChange = e => {
-    const { onChangeTrigger, changeFilterValue} = this.props
-    changeFilterValue(e.target.value)
-    onChangeTrigger ? onChangeTrigger() : console.warn('"onChangeTrigger" func not passed')
-  }
-
-  deleteClick = () => {
-    this.props.clearFilter()
-    this.props.shouldTriggerOnClear && this.props.onChangeTrigger()
-  }
-
-  render() {
-    return (
-      <Relative>
-        <input
-          onChange={this.handleChange}
-          value={this.props.filterValue}
-          style={{width: '100%'}}
-        />
-        <DeleteButton clickHandler={this.deleteClick} />
-      </Relative>
-    )
-  }
-}
+import Input from "components/partials/form/Input"
+import {connect} from "react-redux"
+import {changeSearchString, clearSearchString} from "store/search/searchActions"
+import {Icon} from "antd"
 
 Search.propTypes = {
-  onChangeTrigger: PropTypes.func,
-  shouldClearTriggerChange: PropTypes.bool,
+  afterChangeAction : PropTypes.func
 }
 
-Search.defaultProps = {
-  shouldTriggerOnClear: true
+function Search({changeSearchString, clearSearchString, afterChangeAction, searchString}) {
+  function onChangeHandler(e) {
+    changeSearchString(e.target.value)
+    callAfterChangeAction()
+  }
+  function clearSearch() {
+    clearSearchString()
+    callAfterChangeAction()
+  }
+  function callAfterChangeAction() {
+    afterChangeAction ? afterChangeAction() : console.warn('afterChangeAction not passed')
+  }
+
+  return (
+    <div>
+      <Input
+        value={searchString}
+        onChange={onChangeHandler}
+        prefix={<Icon type={"search"} />}
+        suffix={<Icon type={"close"} onClick={clearSearch}/>}
+      />
+    </div>
+  )
 }
 
 export default connect(
   store => ({
-    filterValue: store.general.filterValue
+    searchString: store.search.searchString
   }),
-  {
-    changeFilterValue,
-    clearFilter
-  }
-)(Search)
+  {changeSearchString, clearSearchString}
+)(Search);
