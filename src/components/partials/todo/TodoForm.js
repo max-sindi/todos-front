@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {FieldTitle} from "./TodoItem"
 import {Card, Button} from "antd"
 import joi from 'joi'
+import _ from "lodash"
 
 const {Input, Checkbox, TextArea} = form
 
@@ -25,7 +26,6 @@ class TodoForm extends Component {
     body: joi.string().required(),
     title: joi.string().required(),
     isDone: joi.boolean(),
-    id: joi.any()
   })
 
   state = {
@@ -39,7 +39,11 @@ class TodoForm extends Component {
   componentDidUpdate = (prevProps) => {
     // push todo-data to state
     if(this.props.todo !== prevProps.todo) {
-      this.setState(state => ({...state, form: {...state.form, ...this.props.todo, id: undefined}}))
+      this.setState(state => ({...state, form: {...takeValuesFromData() }}))
+    }
+    
+    const takeValuesFromData= () => {
+      return _.mapValues(this.state.form, (val, key) => this.props.todo[key])
     }
   }
 
