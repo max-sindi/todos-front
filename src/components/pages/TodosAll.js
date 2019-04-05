@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux"
-import {Loader, TodoItem, links, Search, TodosFilters} from "components/partials"
+import {Loader, links, Search, TodosFilters, TodoList} from "components/partials"
 import {Button, Card} from "antd"
 import styled from 'styled-components'
 import {fetchTodos, fetchTodosWithFiltersAndSearch} from "store/todos/todosActions"
@@ -45,9 +45,7 @@ class TodosAll extends Component {
         </Container>
         <Card>
           {/*mapping items*/}
-          {isFetching ? <Loader /> : todos.map(
-            (item, index) => <TodoItem indexInArray={index} key={item.id} todo={item} />
-          )}
+          {isFetching ? <Loader /> : <TodoList data={todos} /> }
         </Card>
       </div>
     );
