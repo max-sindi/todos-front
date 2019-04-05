@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker'
 import {Route, BrowserRouter as Router, Switch, Redirect, Link} from "react-router-dom"
 import store from "store"
 import * as Pages from 'components/pages'
-import Notifications from "components/notifications/Notifications"
 import {Card} from "antd"
 import 'antd/dist/antd.css'
 
@@ -14,7 +13,6 @@ import 'antd/dist/antd.css'
 ReactDOM.render(
   <Provider store={store}>
     <Card>
-      <Notifications/>
       <Router>
         <>
           <Link to={"/"}>Home -></Link>
